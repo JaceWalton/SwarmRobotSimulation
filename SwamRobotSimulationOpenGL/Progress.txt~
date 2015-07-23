@@ -1,0 +1,24 @@
+May/8/2015
+neurons drawing and moving working on aiming them to the average of all of there angles.
+for some reason this value is amost always between 90 and 180, the lower left quatdrant of the screen.
+another issue is that thrut does not change my directon vector in relation to my currnet angle... need to work on that...
+May/9/2015
+Goal: movement without thrust and findout why angle is betwixt 90 mand 180
+Start 12:00
+move without thrust works 
+not sure why angles converge to lower left quadrent... ????
+gave add functions to velocity and neuron 
+started pseudo code for finding closest neighbor and 6 ways to change angle of neurons
+confermed finding closest neighbor works!!!!
+   I did this by breaking the look during the first iteration then drawing circles on the 0 neruon and jClosest neighbor
+
+Tasks to solve
+with average angles they converge to betwixt 90 and 180 deg +/_ some
+whitch motion is best for swarm motion?
+      // 1 set angle i to angle i
+      // 2 converge i's angle to j's angle
+      // 3 point i to j
+      // 4 convetge i's angle to point to j
+      // 5 point i to avg of two
+      // 6 converge i to avg of two
+

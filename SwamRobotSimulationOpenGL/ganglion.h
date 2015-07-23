@@ -1,0 +1,114 @@
+/****************************************
+ * Ganglion Header file  
+ * declairs prototypes and defines inline
+ * functions of the ganglion class.
+ ***************************************/
+#ifndef _GANGLION_
+#define _GANGLION_
+
+//Dynamicaly allcoated number of neurons (bots) 
+#define NUM_NEURONS 50
+// to cos and sin require radians but I coded in degrees for ease 
+#define TORADIAN 3.1415/180
+// for moveing of the target in simulation, will not be needed in implemtation
+#define TARGETSIZE 50
+// a number index is given to each behavior wich can be selected mid execution
+// and can be different for each bot
+enum{CONVCLOSEST, RONDEZVOUS, CONVTOGOAL, GOTOGOAL, CONVTOGOALWCAUTION,
+     PUSHOBJTOGOAL, BEHAVIORS};
+
+#include "point.h"    
+#include "uiInteract.h"// for the buttons and graphics
+#include "neuron.h"    // the code to handle each bot
+#include "velocity.h"  
+#include <list>
+#include <vector>
+#include <iostream>    // outputs for debugging and inputs to change program
+#include <cmath>       // for cos and sin
+using namespace std;
+
+
+/*****************************************************
+ * This class controled each individual swarm agent future itterations 
+ * will have all code in neuron class. Thus each bot will have control 
+ * itself, for this project the bots are controlled by a hive mind
+ * Ganglion
+ *****************************************************/
+class Ganglion 
+{
+  public:
+   Ganglion();
+   // reset is to be able to restart the simulation w/0 restarting executable
+   void  reset(); 
+   void  draw();  
+   void  increment();
+   // To simulate the movement of the target when being pushed by the neuron
+   void  targetAdvance(int i);
+   // Handles key press events
+   void  interact(const Interface *pUI, void *p);
+   // Tells each neuron what to do, depending on its selected behavior
+   void  behavior();
+   // With this bots smoothy converge to goal angle 
+   float PID(float error, float epk = 0.0, float eik = 0.0, float edk = 0.0);
+   // Each bot moves towards its closest neighbor 
+   void  convClosest();
+   void  calcCenterMass();
+   // high level hehavior using calcCenterMass and convToGoal
+   void  rondezvous();
+   // Most basic hehavior used in almost all high level behaviors
+   void  convToGoal(Point goal, int i = 0);
+   // High level behavioir consits of convToGoal w/ augmented angle
+   void  obstAvoid(Point obst, int i = 0);
+   // convToGoal blended with obsAvoid
+   void  convToGoalWCaution(int i);
+   /*****************************************************
+    * Next 3 function are to push a object towards a goal
+    ****************************************************/
+   // push the targer to the Goal
+   void  targetToGoal(int i);
+   // go to temporary target on opposite side of target
+   void  botToG1(int i);
+   // High level behavior using botToG1 and targetToGoal
+   void  pushObjToGoal();
+
+   // Draws a line from one bot to closeset neighbor
+   void  lineBetwixtClosest(int i);
+   // Draws a line from one bot to all other bots 
+   void  lineBetwixtAll();
+   // Calc the distance from one bot to its closest neighbor 
+   int   calcClosest(int i);
+   // Dist betwixt 2 points order does not matter
+   int   calcDistBetwixt(Point pt0, Point pt1);
+   // angel from Pointer to target 
+   float calcAngleToTarget(Point target, Point Pointer);
+
+    /*****************************************************
+    * These functions were an attempt to simulate swarm behavior
+    ****************************************************/
+   // 1 converge i's angle to j's angle
+   void convItoJ(int i, int angle);
+   // 2 convetge i's angle to point to j
+   void convItowardTarget(int i, int jClosest);
+   // 3 converge i to avg of two
+   void convIavgBoth(int i, int jClosest);
+       
+  private:
+   // pointer to a neuron for dynamic alocation fo neurons 
+   Neuron *neuron;
+   // center of area coordinate (0,0)
+   Point origin;
+   // recieves value of center of mass of bots for Rondezvous
+   Point center;
+   // A goal for for various behaviors
+   Point goal;
+   // Another point for the object to be push towards the goal 
+   Point target;
+   // a temporart target for bot to reach inorder to push target object
+   Point G1;
+   // An arrary of integers which is parsed by behavior function
+   int behaviors[BEHAVIORS];
+   //int iBehavior;
+  
+};
+
+#endif // GANGLION

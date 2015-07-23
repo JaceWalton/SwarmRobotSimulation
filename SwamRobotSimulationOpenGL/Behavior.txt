@@ -1,0 +1,58 @@
+GoToGoal
+	DistToTarget
+	AngleToTarget
+	PointToTarget
+	ObjSensing
+
+AvoidObst
+	DistToTarget
+	AngleToTarget +/- 180 | 90 |45
+	ObjSensing
+
+RunAway
+	DistToTarget (preditor)
+	Angele to Target +/- 180 | 90 |45
+	objSensing
+
+Chase
+	DistToTarget
+	AngleToTarget
+	PointToTarget
+	ObjSensing
+
+CaptureTarget 
+	*Chase w/o keepback
+	DistToTarget
+	AngleToTarget
+	PointToTarget
+	ObjSensing
+
+Follow 
+	*Chase 
+	DistToTarget
+	AngleToTarget
+	PointToTarget
+	ObjSensing
+	convDistToTarget -to set value
+
+Wonder
+	random speed and angle
+
+PushObjectToGoal
+	*GoToGoal *GoToGoal
+	--Target1 Obj to push	
+	DistToTarget//1
+	AngleToTarget//1
+	PointToTarget//1
+	ObjSensing//1
+	--Target2 goal to push Obj to
+	DistToTarget//2
+	PathToTarget - GoToGoal to make target//1 betwixt bot & target//2
+	AngleToTarget//2 
+	
+
+
+
+
+
+

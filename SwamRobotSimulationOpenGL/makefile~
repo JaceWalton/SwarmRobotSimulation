@@ -1,0 +1,82 @@
+###############################################################
+# Program:
+#     Project 4 Asteroids
+#     Brother Grimmett, CS461
+# Author:
+#     Jace Walton
+# Summary:
+#     Nathaniel Mason: I worked on the velocity cpp and header 
+#     files and I worked on the asteroids cpp and header files
+#     specifically handleing the drawing and movement(increment).
+#     I also worked on drawing the drone and worked on it movement
+#     and I worked somewhat on neuron and kryptonites movement
+#     and drawing. Lastly I worked somewhat on the game.cpp file
+#     working on putting the objects on screen and calling their
+#     movement and I worked on the callback function as well. In
+#     uiDraw.cpp I worked on drawing the drone and worked somewhat
+#     in the neuron, kryptonite, missile functions and how the get
+#     Dx and Dy.
+#
+#     Jace Walton: I did most of the drawing apart from the Drone
+#     I also designed to algorythm for the homing missle and how the
+#     missile points at neuron. also how to dorne moves an points as 
+#     neuron. as well as the "collsion" which just stops drawing him.
+#     I have found that deleating a pointer causes a segmentation fault
+#     I could not figure this out so we left is as is.
+#     and most of the Game class as far as we could the origial plan but was 
+#     unable to figur out how to used pointer to create the objects.
+#
+#     Extra Credit: We changed our ship to Neuron and fires lasers.
+#     We also have krptonite, a drone and a homing missile.
+#
+#     Estimated: 40.0 hrs
+#     Actual:    60.0 hrs
+#       pointers to objects and collision.  
+###############################################################
+
+###############################################################
+# Programs:
+#   
+#    Neuron In Space:  this is the ganglion executable  
+###############################################################
+
+Ganglion : uiDraw.o uiInteract.o point.o neuron.o ganglion.o velocity.o
+	g++ -o Ganglion uiDraw.o uiInteract.o point.o neuron.o ganglion.o velocity.o -lglut -lGLU
+
+#	tar -cf Ganglion.tar *.h *.cpp makefile
+
+###############################################################
+# Individual files
+#    uiDraw.o      Draw polygons on the screen and do all OpenGL graphics
+#    uiInteract.o  Handles input events
+#    point.o       The position on the screen
+#    neuron.o    all movebles that are not asteroids
+#    asteroid.o    all asteroids
+#    velocity.o    the velocity vectors
+#    ganglion.o        the ganglion to impliment the rules
+###############################################################
+uiInteract.o : uiInteract.cpp uiInteract.h point.h
+	g++ -c  uiInteract.cpp
+
+uiDraw.o : uiDraw.cpp uiDraw.h point.h
+	g++ -c  uiDraw.cpp
+
+point.o : point.cpp point.h
+	g++ -c  point.cpp
+
+neuron.o : neuron.cpp neuron.h velocity.h point.h uiInteract.h uiDraw.h
+	g++ -c  neuron.cpp
+
+velocity.o : velocity.cpp velocity.h
+	g++ -c  velocity.cpp
+
+ganglion.o : ganglion.cpp ganglion.h velocity.h point.h uiInteract.h
+	g++ -c  ganglion.cpp
+###############################################################
+# General rules
+###############################################################
+clean :
+	rm Ganglion *.o *.tar *.compile
+
+all : Ganglion
+

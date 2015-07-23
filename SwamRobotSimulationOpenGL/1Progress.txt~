@@ -1,0 +1,303 @@
+May/8/2015
+neurons drawing and moving working on aiming them to the average of all of there angles.
+for some reason this value is amost always between 90 and 180, the lower left quatdrant of the screen.
+another issue is that thrut does not change my directon vector in relation to my currnet angle... need to work on that...
+
+May/9/2015
+Goal: movement without thrust and findout why angle is betwixt 90 mand 180
+start 12:00
+end   3:15
+time  3.25 hours
+move without thrust works 
+not sure why angles converge to lower left quadrent... ????
+gave add functions to velocity and neuron 
+started pseudo code for finding closest neighbor and 6 ways to change angle of neurons
+confermed finding closest neighbor works!!!!
+   I did this by breaking the look during the first iteration then drawing circles on the 0 neruon and jClosest neighbor
+
+May/12/2015
+Goal: redraw, bots drawNumber Index, line from one bot not neighbor.
+start 4:00 PM
+end 8:00 PM
+time 4 hours
+I was tackling the issue wonge. I was trying to change only the angle.
+In thinking about the way to converge distance I realized that I would need to change the angle to chage distance betwixt. 
+for example...
+if far aim toards neighbor 
+if close   converge    to avg?, to neightor, to goal, to waypoint?
+Waypoint path to goal around object place waypoints 
+min dist did not work, several errors. I was comparing dist to distPrevious
+this would not find the minimum then I compared dist to a min var whitch I initialized as a vlaue higher that any value could be i looked up some alogorythms on line and then did a desktest on paper and realized i need to reinitialize min for each loop I finished it about 15 min befor the lab closed
+Such a great day!
+
+May/13/2015
+Goal write convItoJ, convItowardJ, and conviavgBoth
+start 2:15
+end 3:00
+start 6:00
+end 7:30
+2.25 hours
+convItowardJ not working yet....
+I think that I am going about the process wrong I am focusing on angle and changing angle by angle parameters I should change angle by distance parameters. other two functions planed work they look great!
+tried to make angle horizontal rather than vertical. Not sure how
+
+
+May/15/2015
+Goal: get point-to-taget to work. it works fine for drone in superman but it has issues in my code. have a arrow pointer drawn to point to neighbor If there is time get angle to be unit circle compliant
+start 1:45
+end 5:15
+time 3 hrs
+point-to-target only needed to have -90 inscerted into set angle changing parameters
+in convItowardJbots increase angle or decrease angle to meet point to neighbor a bot will sometimes move 3/4 of a turn to point at its neighbor. how to fix?
+I made a new funciton to calcAngleToTarget to modualarize it. 
+Also a function to lineBetwixtAll that are 200 pixles apart. This is to modle the spring metod of grouping as stated below. 
+Considering Omnidirectional bot.
+still using angle to change angle rather that dist to change dist. 
+
+May/16/2015
+Goal: Comment everything and get it organized macros for functions etc...
+start 3:30
+end 5:00 
+time 1.5 
+Just worked on comments. still not done fully
+
+May/18/2015
+Goal: Start orginizing behavior classes 
+start 12:15
+end 3:15
+time 3 hrs
+This is going to be tough.... I am have the code organized to be controled by the Ganglion class. I have an array of Neurons in Ganglion and now have to acess the neurons inside of behavior which is inside of neuron. kindof a deadlock problem. 
+I could just have Ganlion be the behavior class and have an int in neuron that indicates the current behavior.
+after 1.5 hrs i returned to original code.... what to do?
+started working on distance parameter rather than angle
+
+May/19/2015
+Goal: negitive angels 
+start 6:15
+end 8:15
+time 2 hrs
+I fixed neg angles by ensuring that they are positive whenever angle is changed
+I tinkered with the convRadiusAll and linebetwixtClosest... I feel that I havent made much progress for a few days.... I need to figure out how to have behaviors for each bot rather than they being mindless drones...
+
+May/20/2015
+Goal: Redesigning behavior into Neuron, change name?  NO CODE DESIGN DOCUMENT 
+start 2:30
+end 3:00
+start 5:00
+end 5:30
+time 1 hr
+not much done today
+
+May/21/2015
+Goal: Angle wrapping
+start 6:15
+end 8:00
+time 1.75 h
+Tried to figure out the error problem for about an hour then realized that I had semicolins after my if statement.... BEFORE my line of code. fixed the error in 5 min....
+
+May/21/2015
+Goal: Outline Behaviors
+start 2:30
+end 3:30
+time 1 h
+make Behvaior.txt and stubbed GoToGoal funciton in behavior class
+
+May/26/2015
+Goal: path and way point algorythm and possibly psudo Code
+start 6:45
+end 8:00
+time 1.25 hr
+That was easy i just dynamicaly alocated a number of wayPoints and set a wayPoint to the current point of each bot. The tail is as many frames as I have wayPoints. for what I did dynamic alocation was not nessiarary howver when I get to chage the trail length and such I will need to re-allocate a new number a way points. that is less stuff to change later.
+
+
+May/27/2015
+Goal: psudocode for distance sensor
+start 1:45
+end 2:30
+time 0.75hr
+
+May/28/2015
+Goal: psudocode for distance sensor choose sensor
+start 2:10
+end 4:10
+time 2 hr
+Feeling board... wiched to converg dist now I am goig for PID error control
+emplimenting some PID it lis looking sort of good, Some bots jsut won't listen and some seem to get it.... they are all being controled by the same algorythm... why do only some work...
+
+
+May/30/2015
+Goal: PID
+start 2:15
+end 4:15
+time 2 hr
+getting it better but it eaither converges too fast or not accuratly...
+I need to learn PID control better I am taking that class next winter but I need it now. It Currently has some over shoot.
+
+June/1/2015
+Goal: PID and Rondezvouse
+start 3:00
+end 6:15
+time 3.25 hr
+"worked" on PID for a bit.... then I got board and decided to do figure out rondezvouse it was kind of easy. I though I wanted to overload the + operator. Turns out no I don't.... I then tried to do an addPt function and that would have the Y (and I think the X) axis off abit on the "center off mass" of the swarm. I then descretly summed the x and y of each bot, it finaly worked! it looks great soon I am going to start working on some more complex behaviors, after I figure smooth out some of the current functions. 
+next time I am going to smooth out the other function I have been spending to much time worriying about how to make each bot independant, during the scope of THIS project there will be a global behavior control class.
+
+June/2/2015
+Goal: clean up ganglion.cpp make the functions look nice and work nice (IE do what they are named for). some funcitons may take parameters (such as rondezvouse) and point bots to the paramter point , center | origin | goal ect.
+start 5:30
+end 6:45 
+time 1.25 hr
+I broke up rondezvous and convClosest (was lineBetwixtClosest). I am considering getting rid of lineBetwixtAll and convAvgRadius what do they even do? they just look cool.... sort of...
+so now rondezvous is a high level behavior make up of low level sub-behaviors. Same for convClosest I have made some more things more modular, not sure what to do with keep dist and I want to be able to move an object.  
+
+June/3/2015
+start 1:30
+end 3:00
+start 6:30
+end 7:00
+time 2.0 hr
+added buttons to uiInteract a,s,d,f,b and 0-9. unfortunatly there are two types of buttons one is a bool and is more of and even like the space bar. the arrow keys deal with how long the key has been pressed. I am not sure if I can do the other key presses I need to find out how to get other keys pressed. Also I may put mouse features into the simulation. Thus the mouse pointer can be either a goal, obstical or preditor.  
+Got some videos for prenting tomorrow. I am not sure why I was not prenting so far. I hope that I will not be docked for this. 
+
+June/4/2015
+Goal fix PID
+start 3:30
+end 5:30
+time 2.0 hr
+studied Matlab and PID
+
+June/5/2015
+start 7:00
+end 8:00
+time 1.0 hr
+tryed to fixt non event buttons... failure. there needs to be other things...
+
+
+June/8/2015
+Goal Fix PID 
+start 1:45
+end 3:00
+start 5:00
+end 6:00
+time  2.25 hr
+I did it! finaly! I found out that I was tuning the PID correctly before but all of my angles were ints', so I went through all files and changes angles to floats. I learned about type deff form Brady, it is like #define or enum but you can define your type and change it as you need over the entire program! I will have to empliment this. I then tried to put the PID into its own function It returns float and take float parameters and I pass in floats but it has wierd errors (undefined reference to `Ganglion::PID(float, float, float, float) ) that  will be my next fix
+
+
+June/9/2015
+Goal fix PID funtion parameters.... modularize behaviors and commment (housekeeping) 
+start 6:15
+end 7:00
+time .75
+undefined ref was becuse I did not have PID as Ganglion:: ... noob...
+Got rid of ConvAvgRadius (put it in ganglionBehaviors/ganglion.cpp) and made lineBetwixtAll to do only what it says also put PID into conv to Goal and therefore rondezvous.
+made lineBetwixtClosest only draw line betwixt closest PID needs error boud cheacking.
+
+
+June/10/2015
+Goal comment and modularize 
+start 2:30
+end 3:00
+start 4:15
+end 6:30 
+time 2.75 hrs
+commented some stuff added switch to behavior such that I can change behabior post execution. when no behavior is selected user has control over bots. when bots have behavior they cannot be directly controled but are controled by the selected behavior.
+
+June/10/2015 
+start4:00 
+end 4:45
+start 6:15
+end 8:15 
+time 2.25 hrs
+Study Control theory and wrote project overview
+
+June/15/2015
+Goal start on obsticle avoidace 
+start 1:00 
+end 3:15
+time 2.25 hrs
+changed convToGoal int obstAvoid. I may be able to use that function. The benifit of this is that one function can do many things, the downside is that if I want to change one behavior all other behaviors that use that funciton would need to be changed. But then again I could just make one extra function and change what is nessisary. It seems like a good idea to me. 
+
+June/15/2015
+Goal more obsticle avoidace 
+start 5:40 
+end 7:25
+time 1.75
+I have a resonalbe obst avoidace it mearly adds 180 degrees the desired angle. I am now trying to use both gtg and oa together but it will not blend as I have it now roam (blending fucntion) all bots will avoid origin if any bot is clost to it. How do i change use both of the behaviors each bot does not have its behavior. An entire structar change would be nessisary. I may need to rewrite the fucnitns to each indiviual bot rather that all of them... I think I'll do that. 
+
+June/23/2015
+Goal push Target to Goal 
+start 4:30 
+end 7:00
+time 2.5 hr
+kind go alomst got it running. This is the algorithm I am using...
+distGT
+angleGT
+G1X = distGT cos(angleGT)
+G1Y = distGT sin(angleGT)
+distBG1
+angleBG1
+gotoG1
+Ok just fixed it... I switched X and Y (X is using sin and Y cos)... I have no idea why..... I'll look into that.... 
+Well first part is done Go to the temporary goal on the far side of the final goal now point to final goal and push object towards it.
+now... if angleG0T== angleG0B && distG0T < distG0B && distG0T > 0
+goToGoal(goal)
+
+June/24/2015
+Goal: push Target to Goal from G1 to G0
+start 2:20 
+end 3:00
+time 1.16 hr 
+
+June/25/2015
+Goal: push Target to Goal from G1 to G0
+start 4:00 
+end 7:00
+time 3 hr
+Got the target to (sortof) move it currently moves in the correct direction only when aproached from the top... cos is neg for somereason...
+I use a boolean mutex to decide if the robot needs to go to the G1 (temp goal) or G0(target objects goal). I am now thinking instead of having a mutex in the neuron (bot) I can give it a string to tell it what behavior to have. 
+I decided to make everything more effecint. I fixed roam (go to goal and obst avoiance) all bots can each avoid the obsticle w/o effecting the others
+I have a way to set all bots behaviors at once does not work properly. Every few times the cin happens there is a segmentation fault. 
+Each bot can have its own behavior but the global does not quite take effect not sure why...
+
+June/30/2015
+Goal: finish push Target to Goal 
+start 4:15
+end 5:15
+time 1 hr
+I put if statements in target advance to ensure that the Dx and Dy for the target movement is in the correct direction. If not target will move in the wrong direction this fucntion will no be needed in emplimentation becuse
+objects move by laws of physics not by code...
+in futher testing the function does not work at 180 or 92 and other angels.
+
+July/6/2015
+Goal: finish push Target to Goal comment and organize 
+start 1:30
+end 3:30
+time 2 hr
+Chagned angle in moveTarget from neuron angle to angel from neuron to goal. and subtract 1 from distance. It works fine now. Spent time reoganizing and getting code ready for.... public consumption. (IE github) I am ashamed of my bad codings skills you Comp science/ software people will probably make fun of me but screw you all! I am a low level C++ develpoer. You can keep your Java! I dont want it...) anyways... I now just need to research and get ready to my presentation at the research and creative works conference. 
+
+
+hr  for week
+
+Tasks to solve
+with average angles they converge to betwixt 90 and 180 deg +/_ some
+think that it 
+
+whitch angle control is best for the swarm motion I am wanting?
+
+
+4 converge to Goal/waypoint  done calcAngleToTarget()
+
+other ideas to implement....
+model of a spring connecting bot to neighbors (closest or withing radius or feild of view?) to maintain distance 
+speed starts random and converges to meet at moderate speed.
+
+*********idea of converging angle speed and distance !!!!!!!!!!!!!!
+how to give each bot its own mind rather than havnig an omnicent queen bot. 
+each bot moves by following its own set of rules 
+
+differnt colors 
+bots realtion lines change with wrap??????
+how to create path? with waypoints?
+PID
+mouse and non-event buttons see brother Helfich
+
+

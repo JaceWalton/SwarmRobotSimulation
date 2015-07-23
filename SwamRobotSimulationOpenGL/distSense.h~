@@ -1,0 +1,50 @@
+/****************************************
+ * Header file for the bots. Each has a 
+ * Point, a Velocity and, a Behavior. 
+ * Each bots behavior should be dynamic
+ * and changeable mutch like Velocity
+ ***************************************/
+#ifndef _DISTSENSE_            
+#define _DISTSENSE_
+#include "point.h"
+#include "uiInteract.h"
+#include "uiDraw.h"
+#include "velocity.h"
+using namespace std;
+
+
+class DistSense
+{                                    
+  public:
+   DistSense();
+   //calls a function to draw bots on the screen
+   void draw();    
+   // For User send commands to each bot 
+   int measureDist();
+   // move sensors with bot???
+   void increment();
+   
+   //getters
+   Point getPt()                                  { return pt;          }
+   float getX()                                   { return pt.getX();   }
+   float getY()                                   { return pt.getY();   }   
+   int   getAngle()                               { return v.getAngle();}
+   // setters
+   void  setAngle(int theta)                      { v.setAngle(theta);  }
+   //increment the angel up or down
+   void  addAngle(int deltaAng)                   { v.addAngle(deltaAng); }
+  protected:
+   Point pt;
+   Velocity v;
+   Point *wayPt;
+   int wayI;
+   // Dynamicaly alocated behavoirs
+   // bot can switch to differant behaviors based its state
+   // (where it is and what it is doing)
+   // Behvior *behavior;
+};
+#endif //_DISTSENSE_
+
+
+
+
